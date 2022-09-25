@@ -94,23 +94,18 @@ To install Docker on some other distribution, please go through the [official do
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo,
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://bitbucket.therapbd.net/scm/thrp/bi-advanced-analytics.git
    ```
-3. Install NPM packages
+2. Navigate to directory where 'Dockerfile' resides and build the docker image,
    ```sh
-   npm install
+   docker build -t img-api-classifier:0.0.1dev1 .
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+4. Run the docker container where docker-compose.yml file resides,
+   ```sh
+   docker compose up -d
    ```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
