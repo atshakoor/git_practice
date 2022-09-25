@@ -55,16 +55,42 @@ This app has been developed utilizing the following,
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Please go through the following instructions to set up the project locally.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+* Docker (Ubuntu)
+
+	* Update the apt package index and install packages to allow apt to use a repository over HTTPS:
+  	```sh
+  	sudo apt-get update
+  	
+  	sudo apt-get install ca-certificates curl gnupg lsb-release
+  	```
+  	
+  	* Add Docker’s official GPG key:
+  	```sh
+  	sudo mkdir -p /etc/apt/keyrings
+  	
+  	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  	```
+  	
+  	* Use the following command to set up the repository:
+  	```sh
+  	echo \
+  	"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  	$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+  	```
+  	
+  	* Update the apt package index, and install the latest version of Docker Engine, containerd, and Docker Compose:
+  	```sh
+  	sudo apt-get update
+  	
+  	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+  	```
+ 
+To install Docker on some other distribution, please go through the [official documentation][docker-install-url]
 
 ### Installation
 
@@ -177,3 +203,4 @@ Use this space to list resources you find helpful and would like to give credit 
 [pyjwt-url]: https://pyjwt.readthedocs.io/en/stable/
 [transformers-url]: https://huggingface.co/docs/transformers/index
 [vit-url]: https://huggingface.co/google/vit-base-patch16-224
+[docker-install-url]: https://docs.docker.com/engine/install/
