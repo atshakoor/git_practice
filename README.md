@@ -24,7 +24,6 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -158,6 +157,8 @@ The above request will generate the following response if successful,
     "message": "Label prediction successful!"
 }
 ```
+
+** Please note, currently this api can only be accessible by user 'therap'. If required, an user database can be implemented based on further discussion.  
 
 
 
