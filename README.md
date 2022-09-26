@@ -49,6 +49,7 @@ This app has been developed utilizing the following,
 * [PyJWT][pyjwt-url]
 * [Transformers][transformers-url]
 * [Vision Transformer][vit-url]
+* [gunicorn][gunicorn-url]
 
 
 
@@ -101,6 +102,10 @@ To install Docker on some other distribution, please go through the [official do
 2. Navigate to directory where 'Dockerfile' resides and build the docker image,
    ```sh
    docker build -t img-api-classifier:0.0.1dev1 .
+3. By default, gunicorn server will be live on port 80 once the docker container is up. To change the port configuration, edit the WEB_BIND environment variable value to desired port in the docker-compose.yml file,
+   ```sh
+   environment:
+      - WEB_BIND=0.0.0.0:80 
    ```
 4. Run the docker container where docker-compose.yml file resides,
    ```sh
@@ -134,8 +139,6 @@ Use this space to list resources you find helpful and would like to give credit 
 * [Font Awesome](https://fontawesome.com)
 * [React Icons](https://react-icons.github.io/react-icons/search)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
@@ -143,4 +146,5 @@ Use this space to list resources you find helpful and would like to give credit 
 [pyjwt-url]: https://pyjwt.readthedocs.io/en/stable/
 [transformers-url]: https://huggingface.co/docs/transformers/index
 [vit-url]: https://huggingface.co/google/vit-base-patch16-224
+[gunicorn-url]: https://gunicorn.org/
 [docker-install-url]: https://docs.docker.com/engine/install/
