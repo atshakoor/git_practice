@@ -117,27 +117,47 @@ To install Docker on some other distribution, please go through the [official do
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+The app exposes two endpoints,
+* http://<host>:<port>/users/login: Handles auth token generation.
+* http://<host>:<port>/prediction: Handles object detection from image.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+To use the endpoint '/prediction', an authorization token is requiered. The following is an example of a POST request generated using curl utility for user authentication and auth token generation,
+```sh
+curl --location --request POST 'http://192.168.0.1:80/users/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username":"therap",
+    "password":"Therap321#"
+}'
+```
+which will generate the following response payload,
+```sh
+{
+    "data": {
+        "exp": "Mon, 26 Sep 2022 04:45:08 GMT",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYmNiOTBiNmYtYWFiMC00M2E4LWFlZTYtZDI2NzBjN2QyOWRhIiwidXNlcm5hbWUiOiJ0aGVyYXAiLCJleHAiOjE2NjQxNjc1MDh9.dPqFoVrGK0KAZtIePAYVUzAuz65haqN8tol52-lQkT8",
+        "user_id": "bcb90b6f-aab0-43a8-aee6-d2670c7d29da",
+        "username": "therap"
+    },
+    "message": "Successfully fetched auth token"
+}
+```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
+Use the username and token received in the header 'Authorization' to generate request for object detection. The token will be valid for 1 hour(s).
+```sh
+curl --location --request POST 'http://192.168.0.1:80/predict' \
+--header 'Authorization: therap eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYmNiOTBiNmYtYWFiMC00M2E4LWFlZTYtZDI2NzBjN2QyOWRhIiwidXNlcm5hbWUiOiJ0aGVyYXAiLCJleHAiOjE2NjQxNjc1MDh9.dPqFoVrGK0KAZtIePAYVUzAuz65haqN8tol52-lQkT8' \
+--form 'image=@"/home/user/Pictures/animals.jpg"'
+``` 
+The above request will generate the following response if successful,
+```sh
+{
+    "data": {
+        "result": "ice bear, polar bear, Ursus Maritimus, Thalarctos maritimus"
+    },
+    "message": "Label prediction successful!"
+}
+```
 
 
 
